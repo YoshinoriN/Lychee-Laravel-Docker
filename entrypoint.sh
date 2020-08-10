@@ -7,7 +7,7 @@ set -e
 read -r longhash < /var/www/html/Lychee/.git/refs/heads/master
 shorthash=$(echo $longhash |cut -c1-7)
 lycheeversion=$(</var/www/html/Lychee/version.md)
-target=$(</var/www/html/Lychee/docker_target)
+#target=$(</var/www/html/Lychee/docker_target)
 
 echo '
 -------------------------------------
@@ -22,7 +22,6 @@ echo '
  |_____\__,_|_|  \__,_| \_/ \___|_|
 
 -------------------------------------
-Lychee Version: '$lycheeversion' ('$target')
 Lychee Commit:  '$shorthash'
 https://github.com/LycheeOrg/Lychee/commit/'$longhash'
 -------------------------------------'
@@ -51,9 +50,9 @@ echo "**** Create the symbolic link for the /sym folder ****"
 	rm -r /var/www/html/Lychee/public/sym && \
 	ln -s /sym /var/www/html/Lychee/public/sym
 
-echo "**** Create the symbolic link to the old Lychee-Laravel folder ****"
-[ ! -L /var/www/html/Lychee-Laravel ] && \
-	ln -s /var/www/html/Lychee /var/www/html/Lychee-Laravel
+#echo "**** Create the symbolic link to the old Lychee-Laravel folder ****"
+#[ ! -L /var/www/html/Lychee-Laravel ] && \
+#	ln -s /var/www/html/Lychee /var/www/html/Lychee-Laravel
 
 cd /var/www/html/Lychee
 

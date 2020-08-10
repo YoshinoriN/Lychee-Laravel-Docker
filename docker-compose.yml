@@ -25,7 +25,8 @@ services:
       - lychee
 
   lychee:
-    image: lycheeorg/lychee
+    #image: lycheeorg/lychee
+    image: 24f12daa68d7
     container_name: lychee
     ports:
       - 90:80
@@ -33,7 +34,7 @@ services:
       - ./lychee/conf:/conf
       - ./lychee/uploads:/uploads
       - ./lychee/sym:/sym
-      - ./src:/var/www/html/Lychee-Laravel
+      - ./src:/var/www/html/Lychee
     networks:
       - lychee
     environment:
