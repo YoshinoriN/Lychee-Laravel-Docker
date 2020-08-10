@@ -26,7 +26,8 @@ services:
 
   lychee:
     #image: lycheeorg/lychee
-    image: ca78be20f444
+    #image: ca78be20f444
+    image: linuxserver/lychee
     container_name: lychee
     ports:
       - 90:80
@@ -34,12 +35,12 @@ services:
       - ./lychee/conf:/conf
       - ./lychee/uploads:/uploads
       - ./lychee/sym:/sym
-      - ./src:/var/www/html/Lychee
+      - ./src:/app/lychee
     networks:
       - lychee
     environment:
-      #- PUID=1000
-      #- PGID=1000
+      - PUID=1000
+      - PGID=1000
       # PHP timezone e.g. PHP_TZ=America/New_York
       - PHP_TZ=UTC
       #- APP_NAME=Laravel
