@@ -48,26 +48,13 @@ RUN \
     webp \
     composer && \
     cd /var/www/html && \
-    if [ "$TARGET" = "release" ] ; then RELEASE_TAG="-b v$(curl -s https://raw.githubusercontent.com/LycheeOrg/Lychee/master/version.md)" ; fi && \
-    git clone --depth 1 $RELEASE_TAG https://github.com/LycheeOrg/Lychee.git && \
-    mv Lychee/.git/refs/heads/master Lychee/master || cp Lychee/.git/HEAD Lychee/master && \
-    mv Lychee/.git/HEAD Lychee/HEAD && \
-    rm -r Lychee/.git/* && \
-    mkdir -p Lychee/.git/refs/heads && \
-    mv Lychee/HEAD Lychee/.git/HEAD && \
-    mv Lychee/master Lychee/.git/refs/heads/master && \
-    echo "$TARGET" > /var/www/html/Lychee/docker_target && \
+    git clone --recurse-submodules https://github.com/LycheeOrg/Lychee.git && \
+    apt-get install -y composer && \
     cd /var/www/html/Lychee && \
-    echo "Last release: $(cat version.md)" && \
-    composer install --no-dev --prefer-dist && \
-    find . -wholename '*/[Tt]ests/*' -delete && \
-    find . -wholename '*/[Tt]est/*' -delete && \
-    rm -r storage/framework/cache/data/* 2> /dev/null || true && \
-    rm    storage/framework/sessions/* 2> /dev/null || true && \
-    rm    storage/framework/views/* 2> /dev/null || true && \
-    rm    storage/logs/* 2> /dev/null || true && \
+    composer install --no-dev && \
     chown -R www-data:www-data /var/www/html/Lychee && \
-    apt-get purge -y --autoremove git composer && \
+    apt-get purge -y git composer && \
+    apt-get autoremove -y && \
     rm -rf /var/lib/apt/lists/*
 
 # Add custom site to apache
