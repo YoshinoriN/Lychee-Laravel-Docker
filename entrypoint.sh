@@ -4,8 +4,8 @@ set -e
 
 # Read Last commit hash from .git
 # This prevents installing git, and allows display of commit
-read -r longhash < /var/www/html/Lychee/.git/refs/heads/master
-shorthash=$(echo $longhash |cut -c1-7)
+#read -r longhash < /var/www/html/Lychee/.git/refs/heads/master
+#shorthash=$(echo $longhash |cut -c1-7)
 lycheeversion=$(</var/www/html/Lychee/version.md)
 #target=$(</var/www/html/Lychee/docker_target)
 
@@ -22,8 +22,6 @@ echo '
  |_____\__,_|_|  \__,_| \_/ \___|_|
 
 -------------------------------------
-Lychee Commit:  '$shorthash'
-https://github.com/LycheeOrg/Lychee/commit/'$longhash'
 -------------------------------------'
 
 if [ -n "$STARTUP_DELAY" ]

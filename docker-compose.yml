@@ -26,6 +26,7 @@ services:
 
   lychee:
     #image: lycheeorg/lychee
+    #image: 43f5c111735b
     #image: ca78be20f444
     image: linuxserver/lychee
     container_name: lychee
@@ -35,7 +36,14 @@ services:
       - ./lychee/conf:/conf
       - ./lychee/uploads:/uploads
       - ./lychee/sym:/sym
-      - ./src:/app/lychee
+      # まるごとマウントしたらシンボリックリンク周りで壊れる
+      - ./src/public/dist:/app/lychee/public/dist
+      - ./src/app:/app/lychee/app
+      - ./src/routes:/app/lychee/routes
+      - ./src/tests:/app/lychee/tests
+      - ./src/vendor:/app/lychee/vendor
+      #- ./src/public/app:/app/lychee/vendor
+      #- ./src:/var/www/html/Lychee
     networks:
       - lychee
     environment:
