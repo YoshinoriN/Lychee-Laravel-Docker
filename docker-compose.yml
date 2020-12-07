@@ -25,10 +25,8 @@ services:
       - lychee
 
   lychee:
-    #image: lycheeorg/lychee
-    #image: 43f5c111735b
-    #image: ca78be20f444
-    image: linuxserver/lychee
+    image: lycheeorg/lychee
+    #image: linuxserver/lychee
     container_name: lychee
     ports:
       - 90:80
@@ -37,13 +35,23 @@ services:
       - ./lychee/uploads:/uploads
       - ./lychee/sym:/sym
       # まるごとマウントしたらシンボリックリンク周りで壊れる
-      - ./src/public/dist:/app/lychee/public/dist
-      - ./src/app:/app/lychee/app
-      - ./src/routes:/app/lychee/routes
-      - ./src/tests:/app/lychee/tests
-      - ./src/vendor:/app/lychee/vendor
+      # linuxserver/lychee ver
+      #- ./src/public/dist:/app/lychee/public/dist
+      #- ./src/app:/app/lychee/app
+      #- ./src/routes:/app/lychee/routes
+      #- ./src/tests:/app/lychee/tests
+      #- ./src/vendor:/app/lychee/vendor
+
+      #- ./src/public/dist:/app/Lychee/public/dist
+      - ./src/app:/var/www/html/Lychee/app
+      - ./src/routes:/var/www/html/Lychee/routes
+      - ./src/resources:/var/www/html/Lychee/resources
+      - ./src/tests:/var/www/html/Lychee/tests
+      #- ./src/vendor:/var/www/html/Lychee/vendor
+
       #- ./src/public/app:/app/lychee/vendor
       #- ./src:/var/www/html/Lychee
+      #- ./src:/var/www/html/Lychee-Laravel
     networks:
       - lychee
     environment:
